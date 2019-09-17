@@ -1,12 +1,26 @@
 describe("Airport", function() {
+  var airport;
+  var plane;
 
+  beforeEach(function() {
+    airport = new Airport();
+    plane = new Plane();
+  })
 
-
-  describe("Land a plane at an Airport", function() {
+  describe("#landPlane", function() {
     it ("lands a plane", function() {
-      airport = new Airport();
-      var plane = {};
-      expect(airport.land_plane(plane)).toBe(true);
+      expect(airport.landPlane(plane)).toBe(true);
     });
   });
+
+  describe("#takeOffPlane", function() {
+    it ("let a plane take off", function() {
+      airport.landPlane(plane);
+      airport.takeOffPlane();
+      expect(airport.all_planes).not.toContain(plane);
+    });
+  });
+
+
+
 });
