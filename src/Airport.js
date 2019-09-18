@@ -1,11 +1,18 @@
-function Airport() {
+function Airport(capacity = 20) {
     this.all_planes = [];
+    this.capacity = capacity;
+
 }
+
 
 Airport.prototype.landPlane = function(plane) {
   if(this.weather() === false){
     throw "Weather is stormy"
   }
+  if(this.full() === true ){
+    throw "Airport is full"
+  }
+
     this.all_planes.push(plane);
     return true;
 };
@@ -24,4 +31,9 @@ Airport.prototype.weather = function() {
     } else {
       return false
     }
+}
+Airport.prototype.full = function() {
+  return (this.all_planes.length === this.capacity)
+
+
 }

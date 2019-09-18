@@ -4,6 +4,7 @@ describe("Airport", function() {
 
   beforeEach(function() {
     airport = new Airport();
+    smallAirport = new Airport(1);
     plane = new Plane();
   })
 
@@ -16,9 +17,18 @@ describe("Airport", function() {
   it ("stop a plane from landing if weather is stormy", function() {
 
       spyOn(airport, "weather").and.returnValue(false)
-      expect(function(){airport.landPlane()}).toThrow("Weather is stormy")
+      expect(function(){airport.landPlane(plane)}).toThrow("Weather is stormy")
 
   })
+
+  it ("stop a plane from landing if capacity is full", function() {
+      smallAirport.landPlane(plane)
+      spyOn(smallAirport, "weather").and.returnValue(true)
+      expect(function(){smallAirport.landPlane(plane)}).toThrow("Airport is full")
+
+  })
+
+// airport is full
 
   describe("#takeOffPlane", function() {
     it ("let a plane take off", function() {
@@ -40,6 +50,8 @@ describe("Airport", function() {
       expect(airport.weather()).toEqual(jasmine.any(Boolean));
     })
   })
+
+
 
 
 });
