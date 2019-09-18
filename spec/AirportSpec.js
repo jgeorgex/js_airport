@@ -13,6 +13,13 @@ describe("Airport", function() {
     });
   });
 
+  it ("stop a plane from landing if weather is stormy", function() {
+
+      spyOn(airport, "weather").and.returnValue(false)
+      expect(function(){airport.landPlane()}).toThrow("Weather is stormy")
+
+  })
+
   describe("#takeOffPlane", function() {
     it ("let a plane take off", function() {
       airport.landPlane(plane);
@@ -21,6 +28,18 @@ describe("Airport", function() {
     });
   });
 
+  it ("stop a plane from taking off if weather is stormy", function() {
+
+      spyOn(airport, "weather").and.returnValue(false)
+      expect(function(){airport.takeOffPlane()}).toThrow("Weather is stormy")
+
+  })
+
+  describe("#weather", function() {
+    it ("Check weather returns is true or false", function() {
+      expect(airport.weather()).toEqual(jasmine.any(Boolean));
+    })
+  })
 
 
 });
